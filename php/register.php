@@ -46,7 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Confirmar la transacción
         $conn->commit();
 
-        echo "<script>alert('¡Registro exitoso! Ahora puedes iniciar sesión.'); window.location.href = '../index.php';</script>";
+        header("Location: ../index.php");
+        exit();
 
     } catch (PDOException $e) {
         // En caso de error, revertir los cambios si hay una transacción activa

@@ -1,8 +1,8 @@
 <?php
 $serverName = "localhost"; // Servidor de XAMPP
 $database = "BD_Gimnasio";
-$username = "root"; // Usuario por defecto en phpMyAdmin XAMPP
-$password = ""; // Contraseña vacía por defecto
+$username = "admin_gym"; // Usuario por defecto en phpMyAdmin XAMPP
+$password = "gym2024"; // Contraseña vacía por defecto
 
 try {
     // Conexión usando PDO para MySQL
