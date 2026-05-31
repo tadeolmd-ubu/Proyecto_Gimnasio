@@ -4,6 +4,32 @@ if (!isset($_SESSION['usuario_id'])) {
     header("Location: ../index.php");
     exit();
 }
+require_once 'conexion.php';
+
+$planes = [];
+try {
+    $stmt = $conn->query("SELECT * FROM Tipo_Membresia ORDER BY monto ASC");
+    $planes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) { $planes = []; }
+
+$entrenadores = [];
+try {
+    $stmt = $conn->query("
+        SELECT e.id_Entrenador, e.nombre, e.apPatEntrenador, e.apMatEntrenador, e.sexo, t.nombre AS turno
+        FROM Entrenador e
+        LEFT JOIN Turno t ON e.id_Turno = t.id_Turno
+        ORDER BY e.nombre ASC
+    ");
+    $entrenadores = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) { $entrenadores = []; }
+
+$cliente_nombre = '';
+try {
+    $stmt = $conn->prepare("SELECT nombreCliente, apPatCliente FROM Cliente WHERE id_Usuario = ?");
+    $stmt->execute([$_SESSION['usuario_id']]);
+    $cli = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($cli) $cliente_nombre = $cli['nombreCliente'] . ' ' . $cli['apPatCliente'];
+} catch (Exception $e) { $cliente_nombre = ''; }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,14 +50,27 @@ if (!isset($_SESSION['usuario_id'])) {
             <a href="#" class="logo">STEELYCO<span>GYM</span></a>
             <nav class="navbar">
                 <ul class="nav-links">
-                    <li><a href="#hero">Inicio</a></li>
-                    <li><a href="#about">Nosotros</a></li>
-                    <li><a href="#areas">Áreas</a></li>
-                    <li><a href="#trainers">Entrenadores</a></li>
-                    <li><a href="#membresias">Membresias</a></li>
-                    <li><a href="#schedule">Horarios</a></li>
+                    <li class="dropdown">
+                        <a href="#">El Gimnasio ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#hero">Inicio</a></li>
+                            <li><a href="#about">Nosotros</a></li>
+                            <li><a href="#areas">Áreas</a></li>
+                            <li><a href="#trainers">Entrenadores</a></li>
+                            <li><a href="#schedule">Horarios</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Membresías ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#membresias">Planes</a></li>
+                            <li><a href="mis_membresias.php">Mis Membresías</a></li>
+                            <li><a href="#" data-open-inscripcion>Inscripciones</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
+            <span class="user-greeting"> Bienvenido 👤 <?= htmlspecialchars($_SESSION['nombre_completo'] ?? $_SESSION['username']) ?></span>
             <a href="logout.php" class="btn btn-logout">Cerrar Sesión</a>
             <button class="btn-mobile" id="mobileMenuBtn">&#9776;</button>
         </div>
@@ -41,11 +80,17 @@ if (!isset($_SESSION['usuario_id'])) {
     <div class="mobile-menu" id="mobileMenu">
         <button class="close-menu" id="closeMenuBtn">&times;</button>
         <ul class="mobile-nav-links">
+            <li class="mobile-user-name">👤 <?= htmlspecialchars($_SESSION['nombre_completo'] ?? $_SESSION['username']) ?></li>
+            <li class="mobile-group-header">— El Gimnasio —</li>
             <li><a href="#hero" class="mobile-link">Inicio</a></li>
             <li><a href="#about" class="mobile-link">Nosotros</a></li>
             <li><a href="#areas" class="mobile-link">Áreas</a></li>
             <li><a href="#trainers" class="mobile-link">Entrenadores</a></li>
             <li><a href="#schedule" class="mobile-link">Horarios</a></li>
+            <li class="mobile-group-header">— Membresías —</li>
+            <li><a href="#membresias" class="mobile-link">Planes</a></li>
+            <li><a href="mis_membresias.php" class="mobile-link">Mis Membresías</a></li>
+            <li><a href="#" class="mobile-link" data-open-inscripcion>Inscripciones</a></li>
             <li><a href="logout.php" class="mobile-link">Cerrar Sesión</a></li>
         </ul>
     </div>
@@ -59,7 +104,7 @@ if (!isset($_SESSION['usuario_id'])) {
         <div class="hero-content">
             <h1 class="hero-title">SUPERA TUS <span>LÍMITES</span></h1>
             <p class="hero-subtitle">Instalaciones premium, equipo de última generación y ambiente motivador para que logres tus metas. Da el primer paso hoy.</p>
-            <button class="btn btn-primary btn-large" id="heroRegisterBtn">Inscríbete Ahora</button>
+            <button class="btn btn-primary btn-large" data-open-inscripcion>Inscríbete Ahora</button>
         </div>
     </section>
 
@@ -315,6 +360,126 @@ if (!isset($_SESSION['usuario_id'])) {
             <p>&copy; 2026 STEELYCO GYM. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <!-- Modal de Inscripción (Wizard) -->
+    <div class="modal-overlay" id="inscripcionModal">
+        <div class="modal-content inscripcion-modal">
+            <button class="close-modal" id="closeInscripcionModal">&times;</button>
+
+            <!-- Barra de progreso -->
+            <div class="wizard-progress">
+                <div class="wizard-step-indicator active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <span>Plan</span>
+                </div>
+                <div class="wizard-line"></div>
+                <div class="wizard-step-indicator" data-step="2">
+                    <div class="step-circle">2</div>
+                    <span>Entrenador</span>
+                </div>
+                <div class="wizard-line"></div>
+                <div class="wizard-step-indicator" data-step="3">
+                    <div class="step-circle">3</div>
+                    <span>Confirmar</span>
+                </div>
+            </div>
+
+            <!-- Paso 1: Seleccionar Plan -->
+            <div class="wizard-step" id="step1">
+                <h2>Elige tu Plan</h2>
+                <p>Selecciona la membresía que mejor se adapte a ti</p>
+                <div class="planes-grid" id="planesGrid">
+                    <?php if (empty($planes)): ?>
+                        <div class="plan-error">No hay planes disponibles</div>
+                    <?php else: ?>
+                        <?php foreach ($planes as $plan): ?>
+                        <div class="plan-card" data-plan-id="<?= $plan['id_Tipo_Membresia'] ?>" data-plan-name="<?= htmlspecialchars($plan['descripcion']) ?>" data-plan-price="<?= $plan['monto'] ?>">
+                            <h3><?= htmlspecialchars($plan['descripcion']) ?></h3>
+                            <p class="plan-precio">$<?= number_format($plan['monto'], 0) ?></p>
+                            <p class="plan-periodo"><?= $plan['descripcion'] === 'Dia' ? 'por día' : ($plan['descripcion'] === 'Semana' ? 'por semana' : ($plan['descripcion'] === 'Mes' ? 'por mes' : 'por año')) ?></p>
+                        </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+                <div class="wizard-nav">
+                    <div></div>
+                    <button class="btn btn-next" id="step1Next" disabled>Siguiente</button>
+                </div>
+            </div>
+
+            <!-- Paso 2: Seleccionar Entrenador (Opcional) -->
+            <div class="wizard-step" id="step2" style="display:none">
+                <h2>¿Entrenador Personal?</h2>
+                <p>Elige un entrenador que te acompañe, o continúa sin uno</p>
+                <div class="entrenadores-grid" id="entrenadoresGrid">
+                    <?php if (empty($entrenadores)): ?>
+                        <div class="plan-error">No hay entrenadores disponibles</div>
+                    <?php else: ?>
+                        <?php foreach ($entrenadores as $ent): ?>
+                        <div class="entrenador-card" data-entrenador-id="<?= $ent['id_Entrenador'] ?>" data-entrenador-name="<?= htmlspecialchars($ent['nombre'] . ' ' . $ent['apPatEntrenador']) ?>">
+                            <div class="entrenador-avatar"><?= strtoupper(substr($ent['nombre'], 0, 1) . substr($ent['apPatEntrenador'], 0, 1)) ?></div>
+                            <div class="entrenador-info">
+                                <h4><?= htmlspecialchars($ent['nombre'] . ' ' . $ent['apPatEntrenador']) ?></h4>
+                                <p class="ent-turno">Turno: <?= htmlspecialchars($ent['turno'] ?? 'No asignado') ?></p>
+                            </div>
+                            <span class="ent-check">&#10003;</span>
+                        </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+                <div class="skip-trainer">
+                    <button class="btn-skip" id="skipTrainer">Continuar sin entrenador</button>
+                </div>
+                <div class="wizard-nav">
+                    <button class="btn-outline-wizard btn-back" data-back="1">Atrás</button>
+                    <button class="btn btn-next" id="step2Next" disabled>Siguiente</button>
+                </div>
+            </div>
+
+            <!-- Paso 3: Confirmación -->
+            <div class="wizard-step" id="step3" style="display:none">
+                <h2>Confirma tu Inscripción</h2>
+                <p>Revisa los detalles antes de finalizar</p>
+                <div class="confirm-summary" id="confirmSummary">
+                    <div class="summary-row">
+                        <span class="summary-label">Cliente</span>
+                        <span class="summary-value" id="summaryCliente"><?= htmlspecialchars($cliente_nombre ?: $_SESSION['usuario_id']) ?></span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Plan</span>
+                        <span class="summary-value" id="summaryPlan">—</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Entrenador</span>
+                        <span class="summary-value" id="summaryEntrenador">Sin entrenador</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Total</span>
+                        <span class="summary-value summary-precio" id="summaryPrecio">—</span>
+                    </div>
+                </div>
+                <div class="wizard-nav">
+                    <button class="btn-outline-wizard btn-back" data-back="2">Atrás</button>
+                    <button class="btn" id="confirmBtn">Confirmar e Inscribirme</button>
+                </div>
+            </div>
+
+            <!-- Paso 4: Éxito -->
+            <div class="wizard-step" id="stepSuccess" style="display:none">
+                <div class="success-icon">&#10004;</div>
+                <h2>¡Inscripción Exitosa!</h2>
+                <p>Tu membresía ha sido activada. ¡Bienvenido a STEELYCO GYM!</p>
+                <button class="btn" id="finishBtn">Ir al Inicio</button>
+            </div>
+
+            <!-- Spinner de carga -->
+            <div class="wizard-step" id="stepLoading" style="display:none">
+                <div class="success-icon" style="font-size:2rem;">⏳</div>
+                <h2>Procesando...</h2>
+                <p>Estamos registrando tu inscripción</p>
+            </div>
+        </div>
+    </div>
 
     <script src="../js/main.js"></script>
 

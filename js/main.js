@@ -174,3 +174,173 @@ const observer = new IntersectionObserver((entries) => {
 
 // Aplica este observador a todos los elementos HTML que tengan la clase 'fade-up'
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ============================================================
+// WIZARD DE INSCRIPCIÓN
+// ============================================================
+(function() {
+    const modal = document.getElementById('inscripcionModal');
+    const closeBtn = document.getElementById('closeInscripcionModal');
+    const openBtns = document.querySelectorAll('[data-open-inscripcion]');
+
+    if (!modal) return;
+
+    let currentStep = 1;
+    const wizardData = { plan: null, entrenador: null };
+
+    // Abrir modal
+    openBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('active');
+            resetWizard();
+        });
+    });
+
+    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.remove('active');
+    });
+
+    function resetWizard() {
+        currentStep = 1;
+        wizardData.plan = null;
+        wizardData.entrenador = null;
+        document.querySelectorAll('.plan-card.selected').forEach(c => c.classList.remove('selected'));
+        document.querySelectorAll('.entrenador-card.selected').forEach(c => c.classList.remove('selected'));
+        document.getElementById('step1Next').disabled = true;
+        document.getElementById('step2Next').disabled = true;
+        showStep(1);
+    }
+
+    function showStep(step) {
+        document.querySelectorAll('.wizard-step').forEach(el => el.style.display = 'none');
+        const target = step === 0 ? document.getElementById('stepLoading')
+                    : step === 4 ? document.getElementById('stepSuccess')
+                    : document.getElementById('step' + step);
+        if (target) target.style.display = 'block';
+
+        document.querySelectorAll('.wizard-step-indicator').forEach((el, i) => {
+            el.classList.remove('active', 'completed');
+            if (step > 0 && i + 1 === step) el.classList.add('active');
+            else if (step > 0 && i + 1 < step) el.classList.add('completed');
+        });
+    }
+
+    // ── Paso 1: Plan ──
+    document.querySelectorAll('.plan-card').forEach(card => {
+        card.addEventListener('click', () => {
+            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            wizardData.plan = {
+                id: card.dataset.planId,
+                name: card.dataset.planName,
+                price: card.dataset.planPrice
+            };
+            document.getElementById('step1Next').disabled = false;
+        });
+    });
+
+    document.getElementById('step1Next').addEventListener('click', () => {
+        if (!wizardData.plan) return;
+        currentStep = 2;
+        showStep(2);
+    });
+
+    // ── Paso 2: Entrenador ──
+    document.querySelectorAll('.entrenador-card').forEach(card => {
+        card.addEventListener('click', () => {
+            document.querySelectorAll('.entrenador-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            wizardData.entrenador = {
+                id: card.dataset.entrenadorId,
+                name: card.dataset.entrenadorName
+            };
+            document.getElementById('step2Next').disabled = false;
+        });
+    });
+
+    document.getElementById('skipTrainer').addEventListener('click', () => {
+        document.querySelectorAll('.entrenador-card').forEach(c => c.classList.remove('selected'));
+        wizardData.entrenador = null;
+        advanceToConfirm();
+    });
+
+    document.getElementById('step2Next').addEventListener('click', () => {
+        if (!wizardData.entrenador) {
+            document.getElementById('step2Next').disabled = true;
+            return;
+        }
+        advanceToConfirm();
+    });
+
+    function advanceToConfirm() {
+        currentStep = 3;
+        showStep(3);
+        populateSummary();
+    }
+
+    function populateSummary() {
+        document.getElementById('summaryPlan').textContent = wizardData.plan
+            ? wizardData.plan.name + ' — $' + Number(wizardData.plan.price).toLocaleString('es-MX')
+            : '—';
+        document.getElementById('summaryEntrenador').textContent = wizardData.entrenador
+            ? wizardData.entrenador.name
+            : 'Sin entrenador';
+        document.getElementById('summaryPrecio').textContent = wizardData.plan
+            ? '$' + Number(wizardData.plan.price).toLocaleString('es-MX')
+            : '—';
+    }
+
+    // ── Botones Atrás ──
+    document.querySelectorAll('.btn-back').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const backTo = parseInt(btn.dataset.back);
+            currentStep = backTo;
+            showStep(currentStep);
+            if (currentStep === 2) {
+                document.getElementById('step2Next').disabled = !wizardData.entrenador;
+            }
+        });
+    });
+
+    // ── Confirmar ──
+    document.getElementById('confirmBtn').addEventListener('click', () => {
+        if (!wizardData.plan) return;
+
+        showStep(0); // loading
+        document.querySelector('#stepLoading h2').textContent = 'Procesando...';
+        document.querySelector('#stepLoading p').textContent = 'Estamos registrando tu inscripción';
+
+        fetch('../php/inscripcion.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                plan_id: wizardData.plan.id,
+                entrenador_id: wizardData.entrenador ? wizardData.entrenador.id : null
+            })
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                currentStep = 4;
+                showStep(4);
+            } else {
+                alert('Error: ' + data.message);
+                currentStep = 3;
+                showStep(3);
+            }
+        })
+        .catch(err => {
+            alert('Error de conexión. Intenta de nuevo.');
+            currentStep = 3;
+            showStep(3);
+        });
+    });
+
+    // ── Finalizar ──
+    document.getElementById('finishBtn').addEventListener('click', () => {
+        modal.classList.remove('active');
+        document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
+    });
+})();

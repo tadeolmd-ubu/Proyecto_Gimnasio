@@ -42,8 +42,10 @@ CREATE TABLE Membresia(
     es_Vencido TINYINT(1) NOT NULL,
     id_Cliente INT NOT NULL,
     id_Tipo_Membresia INT NOT NULL,
+    id_Entrenador INT NULL,
     FOREIGN KEY (id_Cliente) REFERENCES Cliente(id_Cliente),
-    FOREIGN KEY (id_Tipo_Membresia) REFERENCES Tipo_Membresia(id_Tipo_Membresia)
+    FOREIGN KEY (id_Tipo_Membresia) REFERENCES Tipo_Membresia(id_Tipo_Membresia),
+    FOREIGN KEY (id_Entrenador) REFERENCES Entrenador(id_Entrenador)
 );
 
 CREATE TABLE Turno(

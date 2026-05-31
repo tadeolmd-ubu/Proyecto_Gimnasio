@@ -1,8 +1,8 @@
 <?php
-$serverName = "localhost"; // Servidor de XAMPP
+$serverName = "127.0.0.1"; // Servidor de XAMPP (TCP, evita error de socket)
 $database = "BD_Gimnasio";
 $username = "root"; // Usuario por defecto en phpMyAdmin XAMPP
-$password = ""; // Contraseña vacía por defecto
+$password = "root"; // Contraseña de root
 
 try {
     // Conexión usando PDO para MySQL
