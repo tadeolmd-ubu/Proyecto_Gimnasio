@@ -36,8 +36,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
 
         } else {
-            // Usuario o contraseña incorrectos
-            echo "<script>alert('Usuario o contraseña incorrectos.'); window.history.back();</script>";
+            $_SESSION['login_error'] = 'Usuario o contraseña incorrectos.';
+            $_SESSION['login_username'] = $username;
+            header("Location: ../index.php");
             exit();
         }
 
