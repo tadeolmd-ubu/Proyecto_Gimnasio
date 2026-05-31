@@ -22,6 +22,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
+    if ($fecha_nac) {
+        $nacimiento = new DateTime($fecha_nac);
+        $hoy = new DateTime();
+        $edad = $hoy->diff($nacimiento)->y;
+        if ($nacimiento > $hoy) {
+            $_SESSION['register_error'] = 'La fecha de nacimiento no puede ser futura.';
+            $_SESSION['register_data'] = $form_data;
+            header("Location: ../index.php?view=register");
+            exit();
+        }
+        if ($edad < 10) {
+            $_SESSION['register_error'] = 'Debes tener al menos 10 años para registrarte.';
+            $_SESSION['register_data'] = $form_data;
+            header("Location: ../index.php?view=register");
+            exit();
+        }
+    }
+
     try {
         $stmtCheck = $conn->prepare("SELECT COUNT(*) FROM Usuario WHERE username = ? OR correo = ?");
         $stmtCheck->execute([$usuario, $email]);

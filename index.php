@@ -58,6 +58,14 @@ $show_register = isset($_GET['view']) && $_GET['view'] === 'register';
             font-weight: 600;
             font-size: 0.9rem;
         }
+        .field-error {
+            color: #ff3366;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 4px;
+            display: none;
+        }
+        .field-error.visible { display: block; }
         .register-success-msg {
             background-color: rgba(0, 240, 255, 0.15);
             border: 1px solid rgba(0, 240, 255, 0.3);
@@ -136,7 +144,7 @@ $show_register = isset($_GET['view']) && $_GET['view'] === 'register';
                     </div>
                     <div class="input-group">
                         <label>Apellido Materno</label>
-                        <input type="text" name="ap_materno" placeholder="Materno" value="<?= htmlspecialchars($register_data['ap_materno'] ?? '') ?>" required>
+                        <input type="text" name="ap_materno" placeholder="Materno" value="<?= htmlspecialchars($register_data['ap_materno'] ?? '') ?>">
                     </div>
                 </div>
 
@@ -152,7 +160,8 @@ $show_register = isset($_GET['view']) && $_GET['view'] === 'register';
                     </div>
                     <div class="input-group">
                         <label>Fecha de Nacimiento</label>
-                        <input type="date" name="fecha_nac" value="<?= htmlspecialchars($register_data['fecha_nac'] ?? '') ?>" required>
+                        <input type="date" name="fecha_nac" id="fechaNac" value="<?= htmlspecialchars($register_data['fecha_nac'] ?? '') ?>" required>
+                        <div class="field-error"></div>
                     </div>
                 </div>
 
@@ -193,6 +202,30 @@ $show_register = isset($_GET['view']) && $_GET['view'] === 'register';
             e.preventDefault();
             document.getElementById('registerView').style.display = 'none';
             document.getElementById('loginView').style.display = 'block';
+        });
+
+        document.querySelector('#registerView form').addEventListener('submit', function(e) {
+            const fechaInput = document.getElementById('fechaNac');
+            const errorEl = fechaInput.nextElementSibling;
+            errorEl.classList.remove('visible');
+
+            if (!fechaInput.value) return;
+
+            const fecha = new Date(fechaInput.value);
+            const hoy = new Date();
+            let edad = hoy.getFullYear() - fecha.getFullYear();
+            const mes = hoy.getMonth() - fecha.getMonth();
+            if (mes < 0 || (mes === 0 && hoy.getDate() < fecha.getDate())) edad--;
+
+            if (fecha > hoy) {
+                e.preventDefault();
+                errorEl.textContent = 'La fecha no puede ser futura.';
+                errorEl.classList.add('visible');
+            } else if (edad < 10) {
+                e.preventDefault();
+                errorEl.textContent = 'Debes tener al menos 10 años.';
+                errorEl.classList.add('visible');
+            }
         });
     </script>
 </body>
