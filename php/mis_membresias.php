@@ -31,11 +31,18 @@ try {
 }
 
 $cliente_nombre = '';
+$tiene_membresia_activa = false;  // Indica si el cliente ya tiene una membresia activa
 try {
+    // Obtener el nombre completo del cliente
     $stmt = $conn->prepare("SELECT nombreCliente, apPatCliente FROM Cliente WHERE id_Usuario = ?");
     $stmt->execute([$_SESSION['usuario_id']]);
     $cli = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($cli) $cliente_nombre = $cli['nombreCliente'] . ' ' . $cli['apPatCliente'];
+
+    // Verificar si el cliente tiene una membresia activa (no vencida y con fecha de fin >= hoy)
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM Membresia m JOIN Cliente c ON m.id_Cliente = c.id_Cliente WHERE c.id_Usuario = ? AND m.es_Vencido = 0 AND m.fecha_Finalizacion >= CURDATE()");
+    $stmt->execute([$_SESSION['usuario_id']]);
+    $tiene_membresia_activa = $stmt->fetchColumn() > 0;
 } catch (Exception $e) { $cliente_nombre = ''; }
 ?>
 <!DOCTYPE html>
@@ -174,7 +181,11 @@ try {
         <div class="section-container">
             <div class="page-header">
                 <h2 class="section-title" style="margin-bottom:0;">Mis <span>Membresías</span></h2>
-                <a href="dashboard.php" class="btn">Nueva Inscripción</a>
+                <?php if ($tiene_membresia_activa): ?>
+                    <button class="btn" onclick="abrirModalActiva()">Nueva Inscripción</button>
+                <?php else: ?>
+                    <a href="dashboard.php" class="btn">Nueva Inscripción</a>
+                <?php endif; ?>
             </div>
             <p style="color:var(--text-muted); margin-bottom:30px;">
                 <?= htmlspecialchars($cliente_nombre ?: $_SESSION['username']) ?>, aquí puedes ver todas tus membresías.
@@ -184,7 +195,11 @@ try {
                 <div class="vacio-mensaje">
                     <h3>No tienes membresías registradas</h3>
                     <p>Adquiere una membresía para empezar a entrenar.</p>
-                    <a href="dashboard.php" class="btn">Inscribirme Ahora</a>
+                    <?php if ($tiene_membresia_activa): ?>
+                        <button class="btn" onclick="abrirModalActiva()">Inscribirme Ahora</button>
+                    <?php else: ?>
+                        <a href="dashboard.php" class="btn">Inscribirme Ahora</a>
+                    <?php endif; ?>
                 </div>
             <?php else: ?>
                 <div class="schedule-table-container" style="padding:0;">
@@ -226,6 +241,17 @@ try {
             <?php endif; ?>
         </div>
     </section>
+
+    <!-- Modal que se muestra cuando el cliente ya tiene una membresia activa -->
+    <div class="modal-overlay" id="modalActiva">
+        <div class="modal-content" style="max-width:420px; text-align:center;">
+            <h2 style="font-size:1.8rem; margin-bottom:10px;">&#128274; Membresía Activa</h2>
+            <p style="color:var(--text-muted); margin-bottom:20px; font-size:1rem;">
+                Ya tienes una membresía activa. Solo puedes tener una a la vez. Espera a que venza para contratar otra.
+            </p>
+            <button class="btn" onclick="cerrarModalActiva()" style="display:inline-block; margin:0 auto;">Entendido</button>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -269,5 +295,16 @@ try {
         </div>
     </footer>
 
+<script>
+    function abrirModalActiva() {
+        document.getElementById('modalActiva').classList.add('active');
+    }
+    function cerrarModalActiva() {
+        document.getElementById('modalActiva').classList.remove('active');
+    }
+    document.getElementById('modalActiva').addEventListener('click', function(e) {
+        if (e.target === this) cerrarModalActiva();
+    });
+</script>
 </body>
 </html>

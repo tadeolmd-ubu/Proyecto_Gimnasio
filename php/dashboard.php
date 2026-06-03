@@ -68,6 +68,9 @@ try {
                             <li><a href="#" data-open-inscripcion>Inscripciones</a></li>
                         </ul>
                     </li>
+                    <?php if (isset($_SESSION['id_Rol']) && $_SESSION['id_Rol'] == 1): ?>
+                    <li><a href="admin_panel.php">Panel Admin</a></li>
+                    <?php endif; ?>
                 </ul>
             </nav>
             <span class="user-greeting"> Bienvenido 👤 <?= htmlspecialchars($_SESSION['nombre_completo'] ?? $_SESSION['username']) ?></span>
@@ -91,6 +94,10 @@ try {
             <li><a href="#membresias" class="mobile-link">Planes</a></li>
             <li><a href="mis_membresias.php" class="mobile-link">Mis Membresías</a></li>
             <li><a href="#" class="mobile-link" data-open-inscripcion>Inscripciones</a></li>
+            <?php if (isset($_SESSION['id_Rol']) && $_SESSION['id_Rol'] == 1): ?>
+            <li class="mobile-group-header">— Admin —</li>
+            <li><a href="admin_panel.php" class="mobile-link">Panel Admin</a></li>
+            <?php endif; ?>
             <li><a href="logout.php" class="mobile-link">Cerrar Sesión</a></li>
         </ul>
     </div>
@@ -440,6 +447,7 @@ try {
             <div class="wizard-step" id="step3" style="display:none">
                 <h2>Confirma tu Inscripción</h2>
                 <p>Revisa los detalles antes de finalizar</p>
+                <div class="wizard-error" id="wizardError" style="display:none; padding:12px 16px; border-radius:10px; background-color:rgba(255,51,102,0.12); border:1px solid rgba(255,51,102,0.3); color:#ff3366; font-weight:600; font-size:0.9rem; margin-bottom:16px; text-align:center;"></div>
                 <div class="confirm-summary" id="confirmSummary">
                     <div class="summary-row">
                         <span class="summary-label">Cliente</span>

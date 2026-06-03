@@ -210,6 +210,8 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         document.querySelectorAll('.entrenador-card.selected').forEach(c => c.classList.remove('selected'));
         document.getElementById('step1Next').disabled = true;
         document.getElementById('step2Next').disabled = true;
+        var errorDiv = document.getElementById('wizardError');
+        if (errorDiv) errorDiv.style.display = 'none';
         showStep(1);
     }
 
@@ -305,8 +307,15 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     });
 
     // ── Confirmar ──
+    // Enviar la solicitud de inscripcion al servidor via fetch.
+    // Si el servidor devuelve error (por ejemplo membresia activa),
+    // se regresa al paso 3 y se muestra el mensaje dentro del modal
+    // en lugar de usar alert() o redirigir.
     document.getElementById('confirmBtn').addEventListener('click', () => {
         if (!wizardData.plan) return;
+
+        var errorDiv = document.getElementById('wizardError');
+        errorDiv.style.display = 'none';
 
         showStep(0); // loading
         document.querySelector('#stepLoading h2').textContent = 'Procesando...';
@@ -326,15 +335,19 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
                 currentStep = 4;
                 showStep(4);
             } else {
-                alert('Error: ' + data.message);
+                // Mostrar el error (como membresia activa) dentro del modal
                 currentStep = 3;
                 showStep(3);
+                errorDiv.textContent = data.message;
+                errorDiv.style.display = 'block';
             }
         })
         .catch(err => {
-            alert('Error de conexión. Intenta de nuevo.');
+            // Error de red: mostrar el mensaje en el modal sin recargar
             currentStep = 3;
             showStep(3);
+            errorDiv.textContent = 'Error de conexión. Intenta de nuevo.';
+            errorDiv.style.display = 'block';
         });
     });
 
