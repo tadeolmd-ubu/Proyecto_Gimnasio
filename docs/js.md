@@ -1,12 +1,12 @@
 # Module: js
 
-This module handles core client-side logic, managing UI interactions, state transitions, and user feedback across the application.
+This module contains the primary client-side logic responsible for managing the application's state, handling UI interactions, and orchestrating the user workflow across various application screens.
 
 ## File Structure
 
 | File | Purpose |
 |------|---------|
-| `main.js` | JavaScript module — Handles general client-side interactions and UI state management. |
+| `main.js` | Manages core application logic and user interaction functionality — Controls the main entry point and overall UI state. |
 
 ## Functions
 
