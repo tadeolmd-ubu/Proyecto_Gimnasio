@@ -1,16 +1,14 @@
 # Module: repository
 
-**Ubicación:** `/home/tadeofed/temp/Proyecto_Gimnasio-git/repository`
+## File Structure
 
-## Estructura de Archivos
-
-| Archivo | Propósito |
+| File | Purpose |
 | :--- | :--- |
-| `index.php` | Módulo PHP |
+| `index.php` | PHP module |
 
-## Exportaciones
+## Exports
 
-| Nombre | Tipo | Archivo |
+| Name | Kind | File |
 | :--- | :--- | :--- |
 | `login_error` | variable | `index.php` |
 | `login_username` | variable | `index.php` |

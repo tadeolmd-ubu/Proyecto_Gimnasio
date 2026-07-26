@@ -1,34 +1,32 @@
 # Module: php
 
-**Ubicación:** `/home/tadeofed/temp/Proyecto_Gimnasio-git/repository/php`
+## File Structure
 
-## Estructura de Archivos
-
-| Archivo | Propósito |
+| File | Purpose |
 | :--- | :--- |
-| `admin_panel.php` | Módulo PHP |
-| `conexion.php` | Módulo PHP |
-| `dashboard.php` | Módulo PHP |
-| `inscripcion.php` | Módulo PHP |
-| `login.php` | Módulo PHP |
-| `logout.php` | Pendiente de implementar |
-| `mis_membresias.php` | Módulo PHP |
-| `register.php` | Módulo PHP |
+| `admin_panel.php` | PHP module |
+| `conexion.php` | PHP module |
+| `dashboard.php` | PHP module |
+| `inscripcion.php` | PHP module |
+| `login.php` | PHP module |
+| `logout.php` | Pending implementation |
+| `mis_membresias.php` | PHP module |
+| `register.php` | PHP module |
 
-## Funciones
+## Functions
 
-| Nombre | Tipo | Asíncrono | Archivo |
+| Name | Kind | Async | File |
 | :--- | :--- | :--- | :--- |
-| `ejecutarProcedimiento` | `undefined` | | `admin_panel.php` |
+| `ejecutarProcedimiento` | undefined | | `admin_panel.php` |
 
-## Exportaciones
+## Exports
 
-| Nombre | Tipo | Archivo |
+| Name | Kind | File |
 | :--- | :--- | :--- |
 | `mensaje` | variable | `admin_panel.php` |
 | `mensaje_tipo` | variable | `admin_panel.php` |
 | `is_ajax` | variable | `admin_panel.php` |
-| `ejecutarProcedimiento` | función | `admin_panel.php` |
+| `ejecutarProcedimiento` | function | `admin_panel.php` |
 | `stmt` | variable | `admin_panel.php` |
 | `action` | variable | `admin_panel.php` |
 | `resultado` | variable | `admin_panel.php` |
@@ -97,15 +95,7 @@
 | `ap_paterno` | variable | `register.php` |
 | `ap_materno` | variable | `register.php` |
 | `sexo` | variable | `register.php` |
-| `fecha_nac` | variable | `register.php` |
-| `email` | variable | `register.php` |
-| `pass` | variable | `register.php` |
-| `confirm_pass` | variable | `register.php` |
-| `form_data` | variable | `register.php` |
-| `undefined` | variable | `register.php` |
-| `undefined` | variable | `register.php` |
-| `nacimiento` | variable | `register.php` |
-| `hoy` | variable | `register.php` |
-| `edad` | variable | `register.php` |
-| `undefined` | variable | `register.php` |
-| `undefined` | variable | `register.php` |
+| `fecha_inicio` | variable | `register.php` |
+| `correo` | variable | `register.php` |
+| `telefono` | variable | `register.php` |
+| `fecha_fin` | variable | `register.php` |

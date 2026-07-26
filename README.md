@@ -1,37 +1,33 @@
-# Proyecto_Gimnasio-git
+# Proyecto_Gimnasio
 
 ## Overview
 
-| Technology |
-| :--- |
-| CSS |
-| SQL |
-| PHP |
-| JavaScript |
-
-| Technology | File |
-| :--- | :--- |
-| | |
+**Technologies**
+*   CSS
+*   SQL
+*   PHP
+*   JavaScript
 
 ## Project Structure
 
 ```
 repository/
 ├── README.md
-├── css
+├── css/
 │   └── styles.css
-├── database
+├── database/
 │   ├── bd_gimnasio_mysql.sql
 │   ├── limpiar_membresias_duplicadas.sql
 │   ├── migracion_inscripcion.sql
 │   └── procedimientos_almacenados.sql
-├── docs
+├── docs/
 │   ├── Proyecto_Gimnasio.md
 │   ├── css.md
 │   ├── database.md
 │   ├── js.md
-│   └── php.md
-├── img
+│   ├── php.md
+│   └── repository.md
+├── img/
 │   ├── entrenador_1.jpeg
 │   ├── entrenadora.jpeg
 │   ├── grillo.png
@@ -48,9 +44,9 @@ repository/
 │   ├── zona_pecho_2.jpg
 │   └── zona_pierna.jpg
 ├── index.php
-├── js
+├── js/
 │   └── main.js
-└── php
+└── php/
     ├── admin_panel.php
     ├── conexion.php
     ├── dashboard.php
@@ -63,12 +59,12 @@ repository/
 
 ## Modules
 
-| Módulo | Ruta | Archivos |
-| :--- | :--- | :--- |
-| [css](docs/css.md) | `css` | 1 |
-| [database](docs/database.md) | `database` | 4 |
-| [js](docs/js.md) | `js` | 1 |
-| [php](docs/php.md) | `php` | 8 |
+| Module | Documentation Files |
+| :--- | :--- |
+| [css](docs/css.md) | 1 |
+| [database](docs/database.md) | 4 |
+| [js](docs/js.md) | 1 |
+| [php](docs/php.md) | 8 |
 
 ## Database Schema
 

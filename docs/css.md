@@ -1,18 +1,14 @@
-# Módulo: css
+# Module: css
 
-**Ubicación:** `/home/tadeofed/temp/Proyecto_Gimnasio-git/repository/css`
+## File Structure
 
----
-
-## Estructura de Archivos
-
-| Archivo | Propósito |
+| File | Purpose |
 | :--- | :--- |
-| `styles.css` | Estilos CSS globales |
+| `styles.css` | CSS styles |
 
-## Funciones (CSS Variables)
+## Functions
 
-| Nombre | Tipo | Asíncrono | Archivo |
+| Name | Kind | Async | File |
 | :--- | :--- | :--- | :--- |
 | `primary-color` | css-variable | | `styles.css` |
 | `bg-main` | css-variable | | `styles.css` |
@@ -27,9 +23,9 @@
 | `shadow-hover-accent` | css-variable | | `styles.css` |
 | `transition` | css-variable | | `styles.css` |
 
-## Exportaciones de Componentes (Clases CSS)
+## Exports
 
-| Nombre | Tipo | Archivo |
+| Name | Kind | File |
 | :--- | :--- | :--- |
 | `section-container` | class | `styles.css` |
 | `section` | class | `styles.css` |
@@ -70,23 +66,27 @@
 | `membresias-grid` | class | `styles.css` |
 | `membresia-card` | class | `styles.css` |
 | `popular` | class | `styles.css` |
-| `wizard` | class | `styles.css` |
-| `btn-primary` | class | `styles.css` |
-| `modal-content` | class | `styles.css` |
-| `btn-disabled` | class | `styles.css` |
-| `flex-container` | class | `styles.css` |
-| `container-fluid` | class | `styles.css` |
-| `d-flex` | class | `styles.css` |
-| `justify-content-around` | class | `styles.css` |
-| `align-items-center` | class | `styles.css` |
-| `flex-col` | class | `styles.css` |
-| `pb-4` | class | `styles.css` |
-| `text-center` | class | `styles.css` |
-| `mx-auto` | class | `styles.css` |
-| `w-100` | class | `styles.css` |
-| `text-muted` | class | `styles.css` |
-| `mb-3` | class | `styles.css` |
-| `py-2` | class | `styles.css` |
-| `my-5` | class | `styles.css` |
-| `col-md-6` | class | `styles.css` |
-| `col-lg-12` | class | `styles.css` |
+| `membresia-badge` | class | `styles.css` |
+| `membresia-header` | class | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
+| `btn` | `styles.css` |
