@@ -1,17 +1,17 @@
 # Module: js
 
-This module is responsible for handling the core client-side logic, including UI state management, modal interactions, and the multi-step wizard workflow.
+This module handles core client-side logic, managing UI interactions, state transitions, and user feedback across the application.
 
 ## File Structure
 
-| File | Purpose | Description |
-| :--- | :--- | :--- |
-| `main.js` | Manages core UI logic, including mobile menu state, modal interactions, and the multi-step wizard workflow. |
+| File | Purpose |
+|------|---------|
+| `main.js` | JavaScript module — Handles general client-side interactions and UI state management. |
 
 ## Functions
 
 | Name | Kind | Async | File |
-| :--- | :--- | :--- | :--- |
+|------|------|-------|------|
 | toggleMobileMenu | function | | `main.js` |
 | openModal | function | | `main.js` |
 | closeModal | function | | `main.js` |

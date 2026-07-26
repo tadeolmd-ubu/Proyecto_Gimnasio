@@ -1,15 +1,15 @@
 # Module: database
 
-This module manages the underlying persistence layer for the gym application. It contains the necessary SQL scripts, stored procedures, and definitions for the entire database schema.
+This module defines the persistent data layer for the gym management system. It handles the core data structures, relationships, and business logic through SQL database objects.
 
 ## File Structure
 
-| File | Purpose | Description |
-| :--- | :--- | :--- |
-| `bd_gimnasio_mysql.sql` | SQL script | Defines the core structure of the database, including schemas and constraints for key entities. |
-| `limpiar_membresias_duplicadas.sql` | SQL script | Contains logic to identify and clean up records where gym memberships may have been duplicated. |
-| `migracion_inscripcion.sql` | SQL script | Manages the process of migrating existing member enrollment data into the new schema. |
-| `procedimientos_almacenados.sql` | SQL script | Stores common business logic and complex CRUD operations (stored procedures) for management efficiency. |
+| File | Purpose |
+| :--- | :--- |
+| `bd_gimnasio_mysql.sql` | SQL script — Contiene la estructura base de las tablas y clases principales del sistema. |
+| `limpiar_membresias_duplicadas.sql` | SQL script — Ejecuta limpieza de datos y elimina registros redundantes de membresías. |
+| `migracion_inscripcion.sql` | SQL script — Script para la migración inicial o actualización de datos de inscripción de usuarios. |
+| `procedimientos_almacenados.sql` | SQL script — Grupo de procedimientos que encapsulan la lógica de negocio para CRUD de entidades. |
 
 ## Functions
 

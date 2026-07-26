@@ -1,19 +1,19 @@
 # Module: php
 
-This module contains the core business logic and front-end structure for the entire application, managing user interactions, database operations, and page rendering.
+This module section documents the files and functions written in PHP. These files handle various application logic, database connections, and user interaction flows for the gym management system.
 
 ## File Structure
 
-| File | Purpose | Description |
-| :--- | :--- | :--- |
-| `admin_panel.php` | Contains administrative panel functionality. | Handles management of clients, trainers, and appointment schedules for administrators. |
-| `conexion.php` | Manages database connection details. | Establishes and maintains the secure connection parameters to the main database system. |
-| `dashboard.php` | Client's main portal view. | Displays key metrics and summaries for the client's personal information and membership details. |
-| `inscripcion.php` | Handles new membership enrollment. | Manages the process of subscribing new users, associating them with plans and trainers. |
-| `login.php` | Authentication mechanism. | Processes user credentials to authenticate users and manage session state. |
-| `logout.php` | Authentication mechanism. | Archivo sin implementar — pendiente de definir responsabilidad |
-| `mis_membresias.php` | Displays active memberships. | Shows the currently active memberships and associated details for the logged-in user. |
-| `register.php` | Handles new user registration. | Processes the initial form data and creates new user accounts in the system. |
+| File | Purpose |
+| :--- | :--- |
+| `admin_panel.php` | PHP module — Contains the main panel for administrative management and reporting features. |
+| `conexion.php` | PHP module — Manages the establishment and maintenance of the database connection credentials. |
+| `dashboard.php` | PHP module — Displays the primary overview of metrics, plans, and trainer information. |
+| `inscripcion.php` | PHP module — Handles the full registration process for new members and associating services. |
+| `login.php` | PHP module — Provides the interface and logic for user authentication and session management. |
+| `logout.php` | Archivo sin implementar — pendiente de definir responsabilidad |
+| `mis_membresias.php` | PHP module — Displays and manages the list of active and expired memberships for the logged-in user. |
+| `register.php` | PHP module — Processes user information and handles the initial account creation flow. |
 
 ## Functions
 
@@ -32,18 +32,9 @@ This module contains the core business logic and front-end structure for the ent
 | stmt | variable | `admin_panel.php` |
 | action | variable | `admin_panel.php` |
 | resultado | variable | `admin_panel.php` |
-| mensaje | variable | `admin_panel.php` |
-| mensaje_tipo | variable | `admin_panel.php` |
-| msg_limpio | variable | `admin_panel.php` |
 | msg_limpio | variable | `admin_panel.php` |
 | clientes | variable | `admin_panel.php` |
-| stmt | variable | `admin_panel.php` |
-| clientes | variable | `admin_panel.php` |
 | entrenadores | variable | `admin_panel.php` |
-| stmt | variable | `admin_panel.php` |
-| entrenadores | variable | `admin_panel.php` |
-| turnos | variable | `admin_panel.php` |
-| stmt | variable | `admin_panel.php` |
 | turnos | variable | `admin_panel.php` |
 | serverName | variable | `conexion.php` |
 | database | variable | `conexion.php` |
@@ -51,13 +42,10 @@ This module contains the core business logic and front-end structure for the ent
 | password | variable | `conexion.php` |
 | conn | variable | `conexion.php` |
 | planes | variable | `dashboard.php` |
-| stmt | variable | `dashboard.php` |
-| planes | variable | `dashboard.php` |
-| entrenadores | variable | `dashboard.php` |
-| stmt | variable | `dashboard.php` |
 | entrenadores | variable | `dashboard.php` |
 | cliente_nombre | variable | `dashboard.php` |
 | stmt | variable | `dashboard.php` |
+| planes | variable | `dashboard.php` |
 | cli | variable | `dashboard.php` |
 | data | variable | `inscripcion.php` |
 | id_tipo_membresia | variable | `inscripcion.php` |
@@ -65,36 +53,35 @@ This module contains the core business logic and front-end structure for the ent
 | fecha_inicio | variable | `inscripcion.php` |
 | stmt | variable | `inscripcion.php` |
 | cliente | variable | `inscripcion.php` |
-| stmt | variable | `inscripcion.php` |
 | plan | variable | `inscripcion.php` |
-| stmt | variable | `inscripcion.php` |
 | activas | variable | `inscripcion.php` |
 | mapa_duracion | variable | `inscripcion.php` |
 | dias | variable | `inscripcion.php` |
 | fecha_fin | variable | `inscripcion.php` |
-| stmt | variable | `inscripcion.php` |
 | username | variable | `login.php` |
 | password | variable | `login.php` |
 | stmt | variable | `login.php` |
 | usuario | variable | `login.php` |
-| undefined | variable | `login.php` |
-| undefined | variable | `login.php` |
-| undefined | variable | `login.php` |
 | stmtCliente | variable | `login.php` |
-| cliente | variable | `login.php` |
-| undefined | variable | `login.php` |
 | membresias | variable | `mis_membresias.php` |
 | stmt | variable | `mis_membresias.php` |
-| membresias | variable | `mis_membresias.php` |
 | cliente_nombre | variable | `mis_membresias.php` |
 | tiene_membresia_activa | variable | `mis_membresias.php` |
-| stmt | variable | `mis_membresias.php` |
-| cli | variable | `mis_membresias.php` |
-| stmt | variable | `mis_membresias.php` |
-| tiene_membresia_activa | variable | `mis_membresias.php` |
 | usuario | variable | `register.php` |
-| nombre | variable | `nombre` |
-| plan | variable | `plan` |
-| date_inicio | variable | `date_inicio` |
-| fecha_inicio | variable | `fecha_inicio` |
-| stmt | variable | `stmt` |
+| nombre | variable | `register.php` |
+| ap_paterno | variable | `register.php` |
+| ap_materno | variable | `register.php` |
+| sexo | variable | `register.php` |
+| fecha_nac | variable | `register.php` |
+| email | variable | `register.php` |
+| pass | variable | `register.php` |
+| confirm_pass | variable | `register.php` |
+| form_data | variable | `register.php` |
+| nacimiento | variable | `register.php` |
+| hoy | variable | `register.php` |
+| edad | variable | `register.php` |
+| stmtCheck | variable | `register.php` |
+| id_Rol_Cliente | variable | `register.php` |
+| sqlUsuario | variable | `register.php` |
+| stmtUsuario | variable | `register.php` |
+| lastIdUsuario | variable | `register.php` |
