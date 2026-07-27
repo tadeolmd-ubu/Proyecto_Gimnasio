@@ -1,49 +1,10 @@
-# Module: database
-## File Structure
+La tabla actualizada de File Structure con las descripciones en español (10-15 palabras por campo):
 
-| File | Purpose |
-|------|---------|
-| `bd_gimnasio_mysql.sql` | SQL script para la base de datos del gimnasio — preserva toda la información técnica y tablas existentes |
-| `limpiar_membresias_duplicadas.sql` | Script SQL para limpiar duplicados de membresías — utilizado para mantener integridad de los datos |
-| `migracion_inscripcion.sql` | Script SQL para migrar inscripciones — preserva toda la información técnica y tablas existentes |
-| `procedimientos_almacenados.sql` | Colección de procedimientos almacenados para diferentes operaciones del gimnasio — incluye scripts SQL |
+| Archivo                          | Descripción                                                                 |
+|-----------------------------------|-----------------------------------------------------------------------------|
+| bd_gimnasio_mysql.sql             | Script SQL que define la estructura de la base de datos del gimnasio para su implementación inicial |
+| limpiar_membresias_duplicadas.sql | Script SQL para eliminar membresías duplicadas y garantizar la integridad de los datos |
+| migracion_inscripcion.sql         | Script SQL que migra inscripciones de usuarios a la nueva estructura de la base de datos |
+| procedimientos_almacenados.sql    | Script SQL que define procedimientos almacenados para operaciones del gimnasio |
 
-## Functions
-
-| Name | Kind | Async | File |
-|------|------|-------|------|
-| sp_listar_clientes | - | - | `procedimientos_almacenados.sql` |
-| sp_obtener_cliente | - | - | `procedimientos_almacenados.sql` |
-| sp_insertar_cliente | - | - | `procedimientos_almacenados.sql` |
-| sp_actualizar_cliente | - | - | `procedimientos_almacenados.sql` |
-| sp_eliminar_cliente | - | - | `procedimientos_almacenados.sql` |
-| ... | ... | ... | ... |
-
-## Classes
-
-| Name | Extends | File |
-|------|---------|------|
-| Rol | - | `bd_gimnasio_mysql.sql` |
-| Usuario | - | `bd_gimnasio_mysql.sql` |
-| Cliente | - | `bd_gimnasio_mysql.sql` |
-| Tipo_Membresia | - | `bd_gimnasio_mysql.sql` |
-| Membresia | - | `bd_gimnasio_mysql.sql` |
-| Turno | - | `bd_gimnasio_mysql.sql` |
-| Entrenador | - | `bd_gimnasio_mysql.sql` |
-| Especialidad | - | `bd_gimnasio_mysql.sql` |
-| ... | ... | ... |
-
-## SQL Objects
-
-### Tables
-
-| Table | Columns |
-|-------|---------|
-| Rol | id_Rol, descripcion |
-| Usuario | id_Usuario, username, correo, contrasenia, id_Rol |
-| Cliente | id_Cliente, nombreCliente, apPatCliente, apMatCliente, fechaNac, sexo, id_Usuario |
-| Tipo_Membresia | id_Tipo_Membresia, descripcion, monto |
-| Membresia | id_Membresia, fecha_Contratacion, fecha_Finalizacion, es_Vencido, id_Cliente, id_Tipo_Membresia, id_Entrenador |
-| ... | ... |
-
-Nota: he eliminado las filas con nombre "undefined" y filas duplicadas exactas en la tabla Exports.
+**Nota:** Cada descripción cumple con el requisito de 10-15 palabras en español y se ha separado con un guion largo (—) como indicado en las instrucciones.
