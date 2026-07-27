@@ -1,12 +1,12 @@
 # Module: css
 
-This module defines the comprehensive visual styling for the application using CSS. It manages all components, layouts, and interactive element appearances, ensuring a consistent and responsive design across the platform.
+Este módulo centraliza todos los estilos de presentación de la aplicación, manejando la maquetación, tipografía y comportamiento visual de los diversos componentes de la interfaz de usuario.
 
 ## File Structure
 
 | File | Purpose |
 |------|---------|
-| `styles.css` | Defines all global and component-specific visual styles— Manages the appearance of every element in the application. |
+| `styles.css` | Contiene todos los estilos CSS globales y componentes — Define la apariencia visual de la aplicación, incluyendo componentes y diseños de página. |
 
 ## Exports
 
@@ -43,7 +43,6 @@ This module defines the comprehensive visual styling for the application using C
 | trainer-card | class | `styles.css` |
 | area-img-wrapper | class | `styles.css` |
 | trainer-info | class | `styles.css` |
-| membresias-grid | class | `styles.css` |
 | membresia-card | class | `styles.css` |
 | popular | class | `styles.css` |
 | membresia-badge | class | `styles.css` |
@@ -58,51 +57,22 @@ This module defines the comprehensive visual styling for the application using C
 | input-group | class | `styles.css` |
 | error-message | class | `styles.css` |
 | form-link | class | `styles.css` |
-| modal-fade | class | `styles.css` |
-| btn-block | class | `styles.css` |
-| btn-outline | class | `styles.css` |
-| nav-links | class | `styles.css` |
-| pt-lg | class | `styles.css` |
-| mb-xl | class | `styles.css` |
-| modal-open | class | `styles.css` |
-| row-cols-lg | class | `styles.css` |
-| col-md-6 | class | `styles.css` |
-| py-lg | class | `styles.css` |
-| pb-lg | class | `styles.css` |
-| mt-lg | class | `styles.css` |
-| ml-auto | class | `styles.css` |
-| mr-auto | class | `styles.css` |
-| d-flex | class | `styles.css` |
-| justify-content-between | class | `styles.css` |
-| align-items-center | class | `styles.css` |
-| row | class | `styles.css` |
-| col-12 | class | `styles.css` |
-| col-md-4 | class | `styles.css` |
-| row-cols-2 | class | `styles.css` |
-| d-grid | class | `styles.css` |
-| col-md-2 | class | `styles.css` |
-| mb-3 | class | `styles.css` |
-| text-lg | class | `styles.css` |
-| py-2 | class | `styles.css` |
-| mt-3 | class | `styles.css` |
-| text-center | class | `styles.css` |
-| mx-auto | class | `styles.css` |
-| w-100 | class | `styles.css` |
-| align-items-start | class | `styles.css` |
+| schedule-table-container | class | `styles.css` |
+| schedule-table | class | `styles.css` |
+| time | class | `styles.css` |
+| footer | class | `styles.css` |
+| footer-main | class | `styles.css` |
+| footer-icon | class | `styles.css` |
+| social-links | class | `styles.css` |
+| social-btn | class | `styles.css` |
+| footer-bottom | class | `styles.css` |
+| footer-brand | class | `styles.css` |
+| mobile-menu | class | `styles.css` |
+| mobile-user-name | class | `styles.css` |
+| mobile-group-header | class | `styles.css` |
+| btn-mobile | class | `styles.css` |
+| fade-up | class | `styles.css` |
+| areas.css | class | `styles.css` |
 
-```json
-[
-  {
-    "name": "module-container",
-    "class": "container my-5"
-  },
-  {
-    "name": "feature-card",
-    "class": "card shadow-sm p-4"
-  },
-  {
-    "name": "cta-section",
-    "class": "bg-light py-5"
-  }
-]
-```
+## Usability/Design Guidance
+This section provides structural or behavioral guidelines that govern how the application should appear or behave, ensuring a consistent user experience across various components.

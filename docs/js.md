@@ -1,12 +1,12 @@
 # Module: js
 
-This module contains the primary client-side logic responsible for managing the application's state, handling UI interactions, and orchestrating the user workflow across various application screens.
+Este módulo contiene la lógica de frontend principal de la aplicación. Gestiona la interactividad del usuario y coordina los estados del flujo de trabajo de registro.
 
 ## File Structure
 
 | File | Purpose |
 |------|---------|
-| `main.js` | Manages core application logic and user interaction functionality — Controls the main entry point and overall UI state. |
+| `main.js` | Contiene la lógica principal de la aplicación en JavaScript — Maneja la interactividad del DOM y la gestión de estados. |
 
 ## Functions
 

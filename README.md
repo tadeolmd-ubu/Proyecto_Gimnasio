@@ -1,47 +1,44 @@
 # Proyecto_Gimnasio
 
+
 ## Overview
 
-### Technologies Used
+### Tecnologías Utilizadas
 
-| Technology |
-|------------|
+| Tecnología |
+| :--- |
 | CSS |
 | SQL |
 | PHP |
 | JavaScript |
 
-### Technology Implementation Files
+### Tecnologías y Archivos
 
-| Technology | File |
-|------------|------|
-| CSS | styles.css |
-| SQL | bd_gimnasio_mysql.sql |
-| PHP | admin_panel.php, conexion.php, dashboard.php, inscripcion.php, login.php, logout.php, mis_membresias.php, register.php |
-| JavaScript | main.js |
+| Tecnología | Archivo |
+| :--- | :--- |
+| CSS | (N/A) |
+| SQL | (N/A) |
+| PHP | (N/A) |
+| JavaScript | (N/A) |
 
 ## Project Structure
 
-The directory structure contains resources, documentation, and core logic for the gym management system.
-
 ```
-repository/
+Proyecto_Gimnasio/
 ├── README.md
-├── css/
+├── css
 │   └── styles.css
-├── database/
-│   ├── bd_gimnasio_mysql.sql — Script principal para la creación de la base de datos MySQL.
-│   ├── limpiar_membresias_duplicadas.sql — Limpia registros duplicados de membresías.
-│   ├── migracion_inscripcion.sql — Gestiona las migraciones y datos de inscripción.
-│   └── procedimientos_almacenados.sql — Contiene procedimientos y funciones de bases de datos.
-├── docs/
-│   ├── Proyecto_Gimnasio.md — Documentación general del proyecto de gimnasio.
-│   ├── css.md — Detalles de la implementación de estilos CSS.
-│   ├── database.md — Documentación sobre la estructura y gestión de la base de datos.
-│   ├── js.md — Descripción y uso de la lógica de JavaScript.
-│   ├── php.md — Guía de la lógica y módulos PHP.
-│   └── repository.md — Documentación de la estructura del repositorio.
-├── img/
+├── database
+│   ├── bd_gimnasio_mysql.sql
+│   ├── limpiar_membresias_duplicadas.sql
+│   ├── migracion_inscripcion.sql
+│   └── procedimientos_almacenados.sql
+├── docs
+│   ├── css.md
+│   ├── database.md
+│   ├── js.md
+│   └── php.md
+├── img
 │   ├── entrenador_1.jpeg
 │   ├── entrenadora.jpeg
 │   ├── grillo.png
@@ -58,9 +55,9 @@ repository/
 │   ├── zona_pecho_2.jpg
 │   └── zona_pierna.jpg
 ├── index.php
-├── js/
+├── js
 │   └── main.js
-└── php/
+└── php
     ├── admin_panel.php
     ├── conexion.php
     ├── dashboard.php
@@ -73,34 +70,21 @@ repository/
 
 ## Modules
 
-### CSS
-This module manages the styling and visual presentation of the entire user interface, ensuring a cohesive look across all pages.
 | Module | Files |
-|--------|------|
+| :--- | :--- |
 | [css](docs/css.md) | 1 |
-
-### database
-This section handles all database documentation, including schema definitions, migration scripts, and stored procedures.
-| Module | Files |
-|--------|------|
+| *Contiene la documentación sobre los estilos y la hoja de estilo principal del proyecto.* | |
 | [database](docs/database.md) | 4 |
-
-### JS
-This module encapsulates the client-side interactivity and dynamic behaviors of the application.
-| Module | Files |
-|--------|------|
+| *Detalla la estructura y los scripts necesarios para la gestión de la base de datos MySQL.* | |
 | [js](docs/js.md) | 1 |
-
-### PHP
-This module contains the backend business logic, managing sessions, database interactions, and application flow.
-| Module | Files |
-|--------|------|
+| *Documenta el comportamiento y la lógica de interacción del lado del cliente con JavaScript.* | |
 | [php](docs/php.md) | 8 |
+| *Describe los archivos backend encargados de la lógica de negocio y la conexión con la base de datos.* | |
 
 ## Database Schema
 
 | Type | Name | Details |
-|------|------|---------|
+| :--- | :--- | :--- |
 | Table | Rol | 2 columns |
 | Table | Usuario | 5 columns |
 | Table | Cliente | 7 columns |
