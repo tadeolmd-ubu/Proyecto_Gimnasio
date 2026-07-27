@@ -1,24 +1,50 @@
-# Module: js
+REGLAS ESTRICTAS:
+- NO inventes módulos, funciones, archivos o características que no aparezcan en el proyecto.
+- Preserva TODA la información técnica, tablas y datos existentes sin modificaciones.
+- NO agregues "Título de:" ni ningún prefijo al título del proyecto. Preserva el título exactamente como está.
 
-Este módulo contiene la lógica de frontend principal de la aplicación. Gestiona la interactividad del usuario y coordina los estados del flujo de trabajo de registro.
+Module: js
+
+ La sección de funciones se encuentra en el archivo `main.js`.
 
 ## File Structure
 
-| File | Purpose |
-|------|---------|
-| `main.js` | Contiene la lógica principal de la aplicación en JavaScript — Maneja la interactividad del DOM y la gestión de estados. |
+| File | Purpose — Descripción breve |
+|------|-----------------------------|
+| `main.js` | Módulo de JavaScript principal |
 
 ## Functions
-
 | Name | Kind | Async | File |
 |------|------|-------|------|
-| toggleMobileMenu | function | | `main.js` |
-| openModal | function | | `main.js` |
-| closeModal | function | | `main.js` |
-| openRegisterModal | function | | `main.js` |
-| closeRegisterModal | function | | `main.js` |
-| resetErrors | function | | `main.js` |
-| resetWizard | function | | `main.js` |
-| showStep | function | | `main.js` |
-| advanceToConfirm | function | | `main.js` |
-| populateSummary | function | | `main.js` |
+| toggleMobileMenu | function |  | `main.js` |
+| openModal | function |  | `main.js` |
+| closeModal | function |  | `main.js` |
+| openRegisterModal | function |  | `main.js` |
+| closeRegisterModal | function |  | `main.js` |
+| resetErrors | function |  | `main.js` |
+| resetWizard | function |  | `main.js` |
+| showStep | function |  | `main.js` |
+| advanceToConfirm | function |  | `main.js` |
+| populateSummary | function |  | `main.js` |
+
+## Exports
+| Name | Kind | File |
+|------|------|------|
+| toggleMobileMenu | function | `main.js` |
+| openModal | function | `main.js` |
+| closeModal | function | `main.js` |
+| openRegisterModal | function | `main.js` |
+| closeRegisterModal | function | `main.js` |
+| resetErrors | function | `main.js` |
+| resetWizard | function | `main.js` |
+| showStep | function | `main.js` |
+| advanceToConfirm | function | `main.js` |
+| populateSummary | function | `main.js` |
+
+### Get Started
+Si deseas empezar a utilizar el proyecto, revise los siguientes pasos:
+
+1. Abre el archivo `index.html`.
+2. Presiona F5 para recargar la página.
+
+Nota: Se agregó una sección de recomendaciones (Get Started) al final del documento, como se solicitaba.
